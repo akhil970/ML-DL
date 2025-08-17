@@ -143,15 +143,3 @@ This launches a local web interface where you can type questions and receive ans
 * Streamlit UI is designed for simplicity; no document uploads are included — documents must be placed in `data/`.
 * The retriever is designed to reduce hallucinations by filtering results aggressively.
 
----
-
-## Next Steps for Learners
-
-* Try adding more documents and ask cross-document questions.
-* Experiment with different embedding models (e.g., MiniLM, Instructor-xl).
-* Swap Mistral with another GGUF model (Gemma, LLaMA).
-* Customize the prompt template for different response styles.
-
----
-
-Do you want me to also include a **"Common Issues & Fixes"** section (e.g., about Conda env, Python version mismatches, missing langchain subpackages)? This could help learners avoid frustration.
