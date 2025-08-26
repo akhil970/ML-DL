@@ -1,3 +1,5 @@
 dqn_flappy_bird.pth
 dqn_flappy_bird_meta.json
 __pycache__
+dqn_agent_2.py
+dqn_flappy_bird.ckpt

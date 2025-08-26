@@ -77,6 +77,7 @@ def evaluate(num_episodes=5):
                 q_values = policy_net(state_tensor)
                 action = q_values.argmax().item()
             next_state, reward, done, info = env.step(action)
+            #print(f"Action: '{action}',Next-State: '{next_state}'")
             state = next_state
             total_reward += reward
             steps += 1
