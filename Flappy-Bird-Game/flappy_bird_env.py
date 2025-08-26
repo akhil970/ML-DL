@@ -37,11 +37,15 @@ class Bird:
         return pygame.Rect(self.x, self.y, self.width, self.height)
 
 class Pipe:
-    def __init__(self, x):
+    def __init__(self, x, fixed_step=10):
         self.x = x
         self.width = PIPE_WIDTH
         self.gap = PIPE_GAP
-        self.top = random.randint(50, SCREEN_HEIGHT - GROUND_HEIGHT - self.gap - 50)
+        # Set pipe top to a fixed step (10 or 5) within allowed range
+        min_top = 50
+        max_top = SCREEN_HEIGHT - GROUND_HEIGHT - self.gap - 50
+        possible_tops = list(range(min_top, max_top + 1, fixed_step))
+        self.top = random.choice(possible_tops)
         self.bottom = self.top + self.gap
         self.passed = False
 
@@ -70,7 +74,9 @@ class FlappyBirdEnv:
             self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
             self.clock = pygame.time.Clock()
         self.bird = Bird()
-        self.pipes = [Pipe(SCREEN_WIDTH + 100)]
+        # Use fixed_step=10 for pipe heights; change to 5 if desired
+        self.fixed_step = 10
+        self.pipes = [Pipe(SCREEN_WIDTH + 100, fixed_step=self.fixed_step)]
         self.score = 0
         self.done = False
         return self.get_state()
@@ -96,7 +102,7 @@ class FlappyBirdEnv:
                 self.done = True
                 reward = -100
         if add_pipe:
-            self.pipes.append(Pipe(SCREEN_WIDTH))
+            self.pipes.append(Pipe(SCREEN_WIDTH, fixed_step=self.fixed_step))
         for r in rem:
             self.pipes.remove(r)
         if self.bird.y >= SCREEN_HEIGHT - GROUND_HEIGHT - self.bird.height:
